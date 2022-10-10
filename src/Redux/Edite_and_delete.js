@@ -4,6 +4,7 @@ import {createSlice} from "@reduxjs/toolkit"
 const initialState={
     Transfer_Data:{ 
         starting_date:" 16th May'22 09:00 PM",
+        time:"2022-10-20",
         time_title:"Starts in",
         title:"Data Sprint 72 - Butterfly Identification",
         image:"./cardimage/butterfly.png",

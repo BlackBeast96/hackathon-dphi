@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Filter from './filter'
 import { Autocomplete, TextField } from "@mui/material"
 import Filter_Chip from './filter_chip'
 import { useSelector, useDispatch } from 'react-redux'
 import { Filters } from "../Redux/Admin_Panel"
 import Sort from './sort'
+import { RemoveFilters } from "../Redux/Admin_Panel"
+
+
 function Search() {
   const dispatch = useDispatch()
   const data = useSelector((state) => {
@@ -23,53 +26,99 @@ function Search() {
   }
 
   const [cheapval, setcheapval] = useState([])
+
+  // useEffect(()=>{
+  // if(cheapval==""){
+  //   setcheapval(["Upcoming", "Active", "Past"])
+  //     dispatch(Filters("All"))
+  //   }
+  // },[cheapval])
+
   function handleclick(e) {
-    var newcheapval = cheapval.filter((elem) => {
-      return elem != e.target.innerHTML
+    const filtervalue = e.target.innerHTML
+
+    const newcheapval = cheapval.filter((elem) => {
+      return elem != filtervalue
     })
+
+    switch (filtervalue) {
+      case "Active":
+        dispatch(RemoveFilters(filtervalue));
+        break;
+      case "Past":
+        dispatch(RemoveFilters(filtervalue));
+        break;
+      case "Upcoming":
+        dispatch(RemoveFilters(filtervalue));
+        break;
+      case "Easy":
+        dispatch(RemoveFilters(filtervalue));
+        break;
+      case "Hard":
+        dispatch(RemoveFilters(filtervalue));
+        break;
+      case "Medium":
+        dispatch(RemoveFilters(filtervalue));
+        break;
+    }
     setcheapval(newcheapval)
   }
 
-  function handlefilterchange(e) {
-    var filter = e.target.value;
-    switch (filter) {
-      case "All":
-        dispatch(Filters("All"))
-        setcheapval(["Upcoming", "Active", "Past"])
-        break;
-      case "Upcoming":
-        dispatch(Filters("All"))
-        dispatch(Filters("Upcoming"))
-        setcheapval(["Upcoming"])
-        break;
-      case "Active":
-        dispatch(Filters("All"))
-        dispatch(Filters("Active"))
-        setcheapval(["Active"])
 
-        break;
-      case "Past":
-        dispatch(Filters("All"))
-        dispatch(Filters("Past"))
-        setcheapval(["Past"])
-        break;
-      case "Easy":
-        dispatch(Filters("All"))
-        dispatch(Filters("Easy"))
-        setcheapval(["Easy"])
-        break;
-      case "Medium":
-        dispatch(Filters("All"))
-        dispatch(Filters("Medium"))
-        setcheapval(["Medium"])
-        break;
-      case "Hard":
-        dispatch(Filters("All"))
-        dispatch(Filters("Hard"))
-        setcheapval(["Hard"])
-        break;
-      default:
-        dispatch(Filters("All"))
+
+  const [filtervalue, setfiltervalue] = useState()
+
+  function handlefilterchange(e) {
+    const filter = e.target.value;
+    setfiltervalue(filter)
+
+    if (e.target.checked && filtervalue == filter) {
+      dispatch(Filters("All"))
+      setfiltervalue();
+      setcheapval([]);
+      e.target.checked = false
+    }
+
+    else {
+      switch (filter) {
+        case "All":
+          dispatch(Filters("All"))
+          setcheapval(["Upcoming", "Active", "Past"])
+          break;
+        case "Upcoming":
+          dispatch(Filters("All"))
+          dispatch(Filters("Upcoming"))
+          setcheapval(["Upcoming"])
+          break;
+        case "Active":
+          dispatch(Filters("All"))
+          dispatch(Filters("Active"))
+          setcheapval(["Active"])
+
+          break;
+        case "Past":
+          dispatch(Filters("All"))
+          dispatch(Filters("Past"))
+          setcheapval(["Past"])
+          break;
+        case "Easy":
+          dispatch(Filters("All"))
+          dispatch(Filters("Easy"))
+          setcheapval(["Easy"])
+          break;
+        case "Medium":
+          dispatch(Filters("All"))
+          dispatch(Filters("Medium"))
+          setcheapval(["Medium"])
+          break;
+        case "Hard":
+          dispatch(Filters("All"))
+          dispatch(Filters("Hard"))
+          setcheapval(["Hard"])
+          break;
+        default:
+          dispatch(Filters("All"))
+      }
     }
 
   }
@@ -85,10 +134,11 @@ function Search() {
           onChange={handleChange}
           id="combo-box-demo"
           options={SearchingData}
-          sx={{ width: "60vw", borderRadius: 3, }}
+          sx={{ width: "60vw" }}
           renderInput={(params) => <TextField {...params}
-            color="success"
+            color="primary"
             variant='filled'
+            sx={{ input: { color: 'white' } }}
             InputLabelProps={{
               style: { color: '#fff' },
             }}

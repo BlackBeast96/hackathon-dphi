@@ -7,11 +7,11 @@ import {useNavigate} from "react-router-dom"
 import { Transfer } from '../Redux/Edite_and_delete'
 
 function Card(props) {
-
+    const data=useSelector((state)=>state.Transfer.Transfer_Data)
     const navigate=useNavigate()
 
     const dispatch = useDispatch()
-
+    
     function handleclick(){
         dispatch(Transfer({
             starting_date:props.time,
@@ -22,6 +22,7 @@ function Card(props) {
             time_title:props.time_title,
             situation:props.situation,
             time:props.time,
+            id:props.id,
         }))
         navigate("/Edit")
     }

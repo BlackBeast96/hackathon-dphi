@@ -24,7 +24,7 @@ var list = [
     },
 
     {
-        key: 2,
+        id: 2,
         image: "./cardimage/snow_fall.png",
         situation: "Active",
         title: "Data Sprint 71 - Weather Recognition",
@@ -35,7 +35,7 @@ var list = [
     },
 
     {
-        key: 4,
+        id: 4,
         image: "./cardimage/Data_science.png",
         situation: "Upcoming",
         title: "Data Science Bootcamp - Graded Datathon",
@@ -46,7 +46,7 @@ var list = [
     },
 
     {
-        key: 1,
+        id: 1,
         image: "./cardimage/airline_passenger.png",
         situation: "Active",
         title: "Data Sprint 70-Airline Passenger Satisfaction",
@@ -56,7 +56,7 @@ var list = [
         desc: "It's important that customers have an excellent experience every time they travel. On-time flights, good in-flight entertainment, more (and better) snacks, and more legroom might be the obvious contributors to a good experience and more loyalty."
     },
     {
-        key: 6,
+        id: 6,
         image: "./cardimage/graduates.png",
         situation: "Past",
         title: "Engineering Graduates Employment Outcomes",
@@ -78,15 +78,16 @@ var Hackathon = createSlice({
         Add: (state, action) => {
             state.hackathon_data.push(action.payload)
         },
+
         Remove: (state, action) => {
-            const newlist = state.hackathon_data.filter((elem, index) => elem.title != action.payload)
+            const newlist = state.hackathon_data.filter((elem, index) => elem.id != action.payload)
             return {
                 hackathon_data: newlist
             }
         },
+
         Filters: (state, action) => {
             const newlist = state.hackathon_data.filter((elem, index) => elem.situation == action.payload || elem.level == action.payload || elem.title == action.payload)
-
             if (action.payload == "All") {
                 return {
                     hackathon_data: list
@@ -98,19 +99,35 @@ var Hackathon = createSlice({
             }
         },
 
+        RemoveFilters: (state, action) => {
+           
+            const newlist = state.hackathon_data.filter((elem, index) =>{
+                if(action.payload==elem.situation){
+                    return elem.situation != action.payload 
+                }
+                else{
+                    return elem.level != action.payload
+                }
+            }
+            )
+            return {
+                hackathon_data: newlist
+            }
+            
+            
+            
+        },
+
         Sorting:(state,action)=>{
             if(action.payload=="Newest First"){
-
                 var newlist=state.hackathon_data.sort((a,b)=>a.time>b.time ? 1:-1)
-                console.log(newlist);
             }
             if(action.payload=="Oldest First"){
                 var newlist=state.hackathon_data.sort((a,b)=>a.time<b.time ? 1:-1)
-                console.log(newlist);
             }
         }
     }
 })
 
 export default Hackathon.reducer
-export const { Add, Remove, Filters ,Sorting} = Hackathon.actions
+export const { Add, Remove, Filters ,Sorting , RemoveFilters} = Hackathon.actions

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
 
-
 function Hackathon() {
     const data = useSelector((state) => state.Admin.hackathon_data)
     const [hour, sethour] = useState(10);
@@ -63,6 +62,7 @@ function Hackathon() {
                             bgclass={bgcolor}
                             colorclass={color}
                             desc={elem.desc}
+                            id={elem.id}
                         />
 
 

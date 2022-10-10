@@ -8,10 +8,13 @@ import Filter_input from './filter_input'
 
 function Filter(props) {
   const dispatch = useDispatch()
+
   const [show, setshow] = useState("invisible");
+  
   function handleclick() {
     setshow("visible")
   }
+
   document.addEventListener("dblclick", () => {
     setshow("invisible")
   })
@@ -21,12 +24,12 @@ function Filter(props) {
   
   return (
     <>
-      <div className='ml-5'>
+      <div className='ml-4'>
         <div className='w-28 h-10 bg-white rounded-lg text-black mt-2 font-bold text-2xl flex justify-center cursor-pointer ' onClick={handleclick}>
           <h1 className='mt-0.5' >Filter</h1>
           <ArrowDropDown sx={{ mt: 0.7, ml: 1, visibility: { show } }} />
         </div>
-        <section className={`w-36 h-60 rounded-lg bg-white text-black font-bold divide-y absolute pl-2 ${show}  mt-0.5 ml-[-24px] sm:ml-0 space-y-2`}>
+        <section className={`w-32 h-60 rounded-lg bg-white text-black font-bold divide-y absolute pl-2 ${show} mt-0.5 ml-[-22px] sm:ml-0 space-y-2`}>
           <section className='mt-2'>
             <h1>Status</h1>
             <ul className='grid  accent-green-400'>
