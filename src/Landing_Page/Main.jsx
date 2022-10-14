@@ -14,9 +14,9 @@ function Main() {
         <img className='absolute md:relative mt-[-7.5rem] md:mt-[-16rem] lg:mt-[-2rem] md:w-[29rem] ml-[1vw] sm:ml-[24vw] md:ml-0' src="./icons/rocket.svg" alt="rocket svg image" />
       </div>
       <div className='bg-[#002A3B] pt-16 pb-16 grid grid-cols-3 pl-4 sm:pl-0 sm:divide-x'>
-        <Achievement img="./icons/Ai.svg" achive="100k+" title="AI model submissions" alt="Ai icon" />
-        <Achievement img="./icons/achive.svg" achive="50k+" title="Data Scientist" alt="data image" />
-        <Achievement img="./icons/bot.svg" achive="100+" title="AI Challenges hosted" alt="bot icon" />
+        <Achievement img="./icons/Ai.svg" achive={100} quentitiy="k" title="AI model submissions" alt="Ai icon" />
+        <Achievement img="./icons/achive.svg" achive={50} quentitiy="k" title="Data Scientist" alt="data image" />
+        <Achievement img="./icons/bot.svg" achive={100} title="AI Challenges hosted" alt="bot icon" />
       </div>
       <Paticiapte_main />
     </>
