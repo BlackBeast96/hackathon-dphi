@@ -1,15 +1,25 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Filter_input from './filter_input'
 import {useDispatch,useSelector} from "react-redux"
+import {Filters} from "../Redux/Admin_Panel"
 import {Sorting} from "../Redux/Admin_Panel"
 function Sort() {
     const Hackathon_data=useSelector((state)=>{
         return state.Admin.hackathon_data
     })
     const dispatch=useDispatch();
-
+    const [checking,setchecking]=useState();
     function handlechange(e) {
-        dispatch(Sorting(e.target.value))
+        const sorting=e.target.value
+        if(e.target.checked==true && sorting==checking){
+          e.target.checked=false;
+          setchecking()
+          dispatch(Filters("All"))
+        }
+        else{
+            dispatch(Sorting(e.target.value))
+            setchecking(e.target.value)
+        }
     }
     return (
         <>

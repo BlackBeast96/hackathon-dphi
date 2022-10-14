@@ -31,7 +31,7 @@ function Card(props) {
     return (
         <>
             <div className='w-[310px] h-[450px] bg-white rounded-2xl space-y-8 mt-20 cursor-pointer' onClick={handleclick}>
-                <img className='' src={props.image} />
+                <img className='w-96 h-44' src={props.image} />
                 <div className='grid space-y-5 text-center'>
                     <div className={`w-20 h-5 rounded-md bg-yellow-100 justify-self-center ${props.bgclass}`}>
                         <h1 className={`mt-[-2.5px] font-bold text-black ${props.colorclass}`}>{props.situation}</h1>
